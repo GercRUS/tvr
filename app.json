@@ -33,7 +33,7 @@
       "expo-document-picker"
     ],
     "experiments": {
-      "typedRoutes": true,
+      "typedRoutes": true
     }
   }
 }
