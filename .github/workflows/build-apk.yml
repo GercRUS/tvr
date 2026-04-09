@@ -21,10 +21,22 @@ jobs:
             const fs = require('fs');
             const pkg = JSON.parse(fs.readFileSync('package.json','utf8'));
             const catalog = {'@tanstack/react-query':'^5.90.21','react':'19.1.0','react-dom':'19.1.0','zod':'^3.25.76'};
-            for (const [k,v] of Object.entries(pkg.devDependencies||{})) {
-              if (v==='catalog:') { if(catalog[k]) pkg.devDependencies[k]=catalog[k]; else delete pkg.devDependencies[k]; }
-              if (typeof v==='string'&&v.startsWith('workspace:')) delete pkg.devDependencies[k];
+            function clean(deps) {
+              if (!deps) return;
+              for (const k of Object.keys(deps)) {
+                if (deps[k] === 'catalog:') {
+                  if (catalog[k]) deps[k] = catalog[k];
+                  else delete deps[k];
+                }
+                if (typeof deps[k] === 'string' && deps[k].startsWith('workspace:')) {
+                  delete deps[k];
+                }
+              }
+              delete deps['@workspace/api-client-react'];
+              delete deps['babel-plugin-react-compiler'];
             }
+            clean(pkg.dependencies);
+            clean(pkg.devDependencies);
             pkg.name='iptv-player';
             fs.writeFileSync('package.json',JSON.stringify(pkg,null,2));
           "
