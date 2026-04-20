@@ -1,39 +1,29 @@
 {
   "expo": {
     "name": "IPTV Player",
-    "slug": "iptv-player",
+    "slug": "tv",
     "version": "1.0.0",
     "orientation": "landscape",
     "icon": "./assets/images/icon.png",
     "scheme": "iptv-player",
     "userInterfaceStyle": "dark",
     "newArchEnabled": false,
-    "splash": {
-      "image": "./assets/images/icon.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#0a0a0f"
-    },
     "ios": {
       "supportsTablet": true
     },
     "android": {
+      "package": "com.gerc.tv",
       "minSdkVersion": 26
     },
-    "web": {
-      "favicon": "./assets/images/icon.png"
+    "extra": {
+      "eas": {
+        "projectId": "9ae792f1-8935-44b7-ad20-b00ee52fb696"
+      }
     },
     "plugins": [
-      [
-        "expo-router",
-        {
-          "origin": "https://replit.com/"
-        }
-      ],
+      "expo-router",
       "expo-font",
       "expo-document-picker"
-    ],
-    "experiments": {
-      "typedRoutes": true
-    }
+    ]
   }
 }
