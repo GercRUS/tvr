@@ -7,7 +7,7 @@
     "icon": "./assets/images/icon.png",
     "scheme": "iptv-player",
     "userInterfaceStyle": "dark",
-    "newArchEnabled": true,
+    "newArchEnabled": false,
     "splash": {
       "image": "./assets/images/icon.png",
       "resizeMode": "contain",
@@ -17,24 +17,19 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "com.myiptv.player",
       "minSdkVersion": 26
     },
     "web": {
       "favicon": "./assets/images/icon.png"
     },
     "plugins": [
-      [
-        "expo-router",
-        {
-          "origin": "https://replit.com/"
-        }
-      ],
+      "expo-router",
       "expo-font",
       "expo-document-picker"
     ],
     "experiments": {
-      "typedRoutes": true,
-      "reactCompiler": true
+      "typedRoutes": true
     }
   }
 }
