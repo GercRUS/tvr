@@ -26,23 +26,32 @@ export default function RootLayout() {
 
   useEffect(() => {
     if (fontsLoaded || fontError) {
-      SplashScreen.hideAsync();
+      // Маленькая задержка перед скрытием, чтобы UI успел "проснуться"
+      setTimeout(() => {
+        SplashScreen.hideAsync().catch(() => {
+            /* игнорируем ошибки скрытия */
+        });
+      }, 100);
     }
   }, [fontsLoaded, fontError]);
 
-  if (!fontsLoaded && !fontError) return null;
+  // Вместо return null, возвращаем пустую View или просто контейнер
+  // Это не даст приложению "схлопнуться" до загрузки
+  if (!fontsLoaded && !fontError) {
+    return <GestureHandlerRootView style={{ flex: 1, backgroundColor: '#000' }} />;
+  }
 
   return (
     <SafeAreaProvider>
-      <ErrorBoundary>
-        <GestureHandlerRootView style={{ flex: 1 }}>
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <ErrorBoundary>
           <PlayerProvider>
             <Stack screenOptions={{ headerShown: false }}>
-              <Stack.Screen name="index" options={{ headerShown: false }} />
+              <Stack.Screen name="index" />
             </Stack>
           </PlayerProvider>
-        </GestureHandlerRootView>
-      </ErrorBoundary>
+        </ErrorBoundary>
+      </GestureHandlerRootView>
     </SafeAreaProvider>
   );
 }
